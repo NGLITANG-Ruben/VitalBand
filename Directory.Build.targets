@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup Condition="$(TargetFramework.Contains('-android'))">
+    <!-- Android 8.0 minimum (notifications) -->
+    <SupportedOSPlatformVersion>26.0</SupportedOSPlatformVersion>
+  </PropertyGroup>
+</Project>

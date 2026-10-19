@@ -9,9 +9,31 @@ namespace VitalBand.App.Services;
 public class ApiService
 {
     // Le téléphone atteint l'API du PC grâce à : adb reverse tcp:5000 tcp:5000
-    private const string BaseUrl = "http://localhost:5000";
+    // Par défaut : adb reverse tcp:5000 tcp:5000 (USB). Modifiable depuis l'écran d'accueil pour un réseau Wi-Fi.
+    public const string DefaultUrl = "http://localhost:5000";
     private static readonly JsonSerializerOptions Json = new(JsonSerializerDefaults.Web);
-    private readonly HttpClient _http = new() { BaseAddress = new Uri(BaseUrl), Timeout = TimeSpan.FromSeconds(15) };
+    private HttpClient _http = Create(Preferences.Get("server_url", DefaultUrl));
+    private string? _token;
+
+    public string ServerUrl => _http.BaseAddress?.ToString().TrimEnd('/') ?? DefaultUrl;
+
+    private static HttpClient Create(string url)
+    {
+        if (!Uri.TryCreate(url, UriKind.Absolute, out var uri)) uri = new Uri(DefaultUrl);
+        return new HttpClient { BaseAddress = uri, Timeout = TimeSpan.FromSeconds(15) };
+    }
+
+    public bool SetServerUrl(string url)
+    {
+        url = (url ?? "").Trim().TrimEnd('/');
+        if (!Uri.TryCreate(url, UriKind.Absolute, out var uri) || (uri.Scheme != "http" && uri.Scheme != "https"))
+            return false;
+        Preferences.Set("server_url", url);
+        _http.Dispose();
+        _http = Create(url);
+        if (_token != null) SetToken(_token);
+        return true;
+    }
 
     public string FirstName { get; private set; } = "";
     public string LastName { get; private set; } = "";
@@ -64,6 +86,7 @@ public class ApiService
         LastName = "";
         UserId = 0;
         _http.DefaultRequestHeaders.Authorization = null;
+        _token = null;
     }
 
     // Lit l'identifiant de l'utilisateur dans le jeton (utile pour ranger sa photo de profil)
@@ -79,8 +102,11 @@ public class ApiService
         catch { return 0; }
     }
 
-    private void SetToken(string token) =>
+    private void SetToken(string token)
+    {
+        _token = token;
         _http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+    }
 
     // Méthode générique utilisée par toutes les fonctionnalités (mesures, seuils, rappels)
     public async Task<(T? Data, string? Error)> SendAsync<T>(HttpMethod method, string url, object? body = null)

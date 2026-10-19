@@ -1,0 +1,11 @@
+<Project>
+  <PropertyGroup>
+    <!-- Avertissements CA1416 sans effet : le code vérifie la version d'Android avant d'appeler ces fonctions -->
+    <NoWarn>$(NoWarn);CA1416</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <!-- APK installable directement (et non un .aab) ; pas de réduction de code (évite les problèmes de JSON) -->
+    <AndroidPackageFormat>apk</AndroidPackageFormat>
+    <PublishTrimmed>false</PublishTrimmed>
+  </PropertyGroup>
+</Project>

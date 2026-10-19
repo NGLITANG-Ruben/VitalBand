@@ -13,5 +13,11 @@
         <Button Text="Commencer" BackgroundColor="White" TextColor="{StaticResource VbBrand}"
                 FontAttributes="Bold" CornerRadius="12" HeightRequest="50" Margin="0,24,0,0"
                 Clicked="OnStart" />
+        <Label x:Name="ServerLabel" TextColor="{StaticResource VbMint}" FontSize="12"
+               HorizontalTextAlignment="Center" Margin="0,28,0,0" Opacity="0.8">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnServerTapped" />
+            </Label.GestureRecognizers>
+        </Label>
     </VerticalStackLayout>
 </ContentPage>
