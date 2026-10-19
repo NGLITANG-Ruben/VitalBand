@@ -150,12 +150,20 @@ Les conseils santé et les questions fréquentes sont dans `VitalBand.App/Resour
 
 ## Captures d'écran
 
-Les captures se trouvent dans `docs/screenshots/` :
-
-| Accueil | Saisie | Courbes |
-|---|---|---|
-| ![Accueil](docs/screenshots/accueil.png) | ![Saisie](docs/screenshots/saisie.png) | ![Courbes](docs/screenshots/courbes.png) |
-
-| Historique | Rappels | Export PDF |
-|---|---|---|
-| ![Historique](docs/screenshots/historique.png) | ![Rappels](docs/screenshots/rappels.png) | ![Export PDF](docs/screenshots/export.png) |
+<table>
+  <tr align="center">
+    <td><b>Accueil</b><br><img src="docs/screenshots/accueil.jpg" width="220"></td>
+    <td><b>Nouvelle mesure</b><br><img src="docs/screenshots/saisie.jpg" width="220"></td>
+    <td><b>Historique</b><br><img src="docs/screenshots/historique.jpg" width="220"></td>
+  </tr>
+  <tr align="center">
+    <td><b>Courbes</b><br><img src="docs/screenshots/courbes.jpg" width="220"></td>
+    <td><b>Seuils personnalisés</b><br><img src="docs/screenshots/seuils.jpg" width="220"></td>
+    <td><b>Rappels</b><br><img src="docs/screenshots/rappels.jpg" width="220"></td>
+  </tr>
+  <tr align="center">
+    <td><b>Export PDF</b><br><img src="docs/screenshots/export.jpg" width="220"></td>
+    <td><b>Conseils &amp; FAQ</b><br><img src="docs/screenshots/conseils-faq.jpg" width="220"></td>
+    <td><b>Profil</b><br><img src="docs/screenshots/profil.jpg" width="220"></td>
+  </tr>
+</table>
