@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:VitalBand.App.ViewModels"
+             xmlns:v="clr-namespace:VitalBand.App.Views"
+             x:Class="VitalBand.App.Views.ExportPage"
+             x:DataType="vm:ExportViewModel"
+             BackgroundColor="{StaticResource VbBg}"
+             Shell.NavBarIsVisible="False">
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout>
+                <v:PageHeader Title="Export PDF" Subtitle="Une synthèse lisible pour votre médecin" ActionText="Retour" ActionCommand="{Binding BackCommand}" />
+                <VerticalStackLayout Padding="24,8,24,32" Spacing="14">
+                    <Label Text="Période" FontAttributes="Bold" TextColor="{StaticResource VbInk}" />
+                    <HorizontalStackLayout Spacing="8">
+                        <Button Text="7 j" Style="{StaticResource ChipButton}" Command="{Binding SetPeriodCommand}" CommandParameter="7">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding Period}" Value="7">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource VbBrand}" />
+                                    <Setter Property="TextColor" Value="White" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+                        <Button Text="30 j" Style="{StaticResource ChipButton}" Command="{Binding SetPeriodCommand}" CommandParameter="30">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding Period}" Value="30">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource VbBrand}" />
+                                    <Setter Property="TextColor" Value="White" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+                        <Button Text="90 j" Style="{StaticResource ChipButton}" Command="{Binding SetPeriodCommand}" CommandParameter="90">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding Period}" Value="90">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource VbBrand}" />
+                                    <Setter Property="TextColor" Value="White" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+                        <Button Text="Perso" Style="{StaticResource ChipButton}" Command="{Binding SetPeriodCommand}" CommandParameter="CUSTOM">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding Period}" Value="CUSTOM">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource VbBrand}" />
+                                    <Setter Property="TextColor" Value="White" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+                    </HorizontalStackLayout>
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="12" IsVisible="{Binding IsCustom}">
+                        <v:FormField Caption="Du (JJ/MM/AAAA)" Text="{Binding FromText}" Error="{Binding FromError}" />
+                        <v:FormField Grid.Column="1" Caption="Au (JJ/MM/AAAA)" Text="{Binding ToText}" Error="{Binding ToError}" />
+                    </Grid>
+
+                    <Border Style="{StaticResource Card}">
+                        <VerticalStackLayout Spacing="8">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Text="Tension" VerticalOptions="Center" TextColor="{StaticResource VbInk}" />
+                                <CheckBox Grid.Column="1" IsChecked="{Binding IncludeBp}" Color="{StaticResource VbBrand}" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Text="Glycémie" VerticalOptions="Center" TextColor="{StaticResource VbInk}" />
+                                <CheckBox Grid.Column="1" IsChecked="{Binding IncludeGlycemia}" Color="{StaticResource VbBrand}" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Text="Inclure les courbes" VerticalOptions="Center" TextColor="{StaticResource VbInk}" />
+                                <CheckBox Grid.Column="1" IsChecked="{Binding IncludeCharts}" Color="{StaticResource VbBrand}" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Text="Inclure les commentaires" VerticalOptions="Center" TextColor="{StaticResource VbInk}" />
+                                <CheckBox Grid.Column="1" IsChecked="{Binding IncludeComments}" Color="{StaticResource VbBrand}" />
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Style="{StaticResource Card}">
+                        <VerticalStackLayout Spacing="2">
+                            <Label Text="{Binding PreviewTitle}" FontAttributes="Bold" TextColor="{StaticResource VbInk}" />
+                            <Label Text="{Binding PreviewDetail}" Style="{StaticResource MutedText}" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Button Text="Générer le PDF" Style="{StaticResource PrimaryButton}" Command="{Binding GenerateCommand}" />
+                    <ActivityIndicator IsRunning="{Binding IsBusy}" Color="{StaticResource VbBrand}" />
+                    <Label Text="Génération en cours…" IsVisible="{Binding IsBusy}" Style="{StaticResource MutedText}"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <v:ToastView />
+    </Grid>
+</ContentPage>

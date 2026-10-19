@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VitalBand.App.Views.AvatarView"
+             x:Name="root">
+    <Border x:Name="Box" BackgroundColor="{StaticResource VbMint}" Stroke="White" StrokeThickness="2">
+        <Grid>
+            <Label x:Name="InitialsLabel" Text="{Binding Initials, Source={x:Reference root}}"
+                   HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold"
+                   TextColor="{StaticResource VbDark}" IsVisible="{Binding ShowInitials, Source={x:Reference root}}" />
+            <Image Source="{Binding Source, Source={x:Reference root}}" Aspect="AspectFill"
+                   IsVisible="{Binding HasImage, Source={x:Reference root}}" />
+        </Grid>
+    </Border>
+</ContentView>

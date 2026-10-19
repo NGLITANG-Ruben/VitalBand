@@ -1,0 +1,46 @@
+-- VitalBand : schéma de la base MySQL
+USE vitalband;
+
+CREATE TABLE IF NOT EXISTS users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  first_name VARCHAR(60) NOT NULL,
+  last_name VARCHAR(60) NOT NULL,
+  email VARCHAR(120) NOT NULL UNIQUE,
+  password_hash VARCHAR(255) NOT NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+) CHARACTER SET utf8mb4;
+
+CREATE TABLE IF NOT EXISTS measurements (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  type ENUM('BP','GLYCEMIA') NOT NULL,
+  systolic SMALLINT NULL,
+  diastolic SMALLINT NULL,
+  pulse SMALLINT NULL,
+  glucose DECIMAL(5,2) NULL,
+  context ENUM('FASTING','BEFORE_MEAL','AFTER_MEAL') NULL,
+  measured_at DATETIME NOT NULL,
+  comment VARCHAR(500) NULL,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  INDEX idx_user_type_date (user_id, type, measured_at)
+) CHARACTER SET utf8mb4;
+
+CREATE TABLE IF NOT EXISTS thresholds (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  metric ENUM('SYSTOLIC','DIASTOLIC','GLUCOSE') NOT NULL,
+  min_value DECIMAL(5,2) NOT NULL,
+  max_value DECIMAL(5,2) NOT NULL,
+  UNIQUE KEY uq_user_metric (user_id, metric),
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) CHARACTER SET utf8mb4;
+
+CREATE TABLE IF NOT EXISTS reminders (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  type ENUM('BP','GLYCEMIA') NOT NULL,
+  remind_time TIME NOT NULL,
+  days_mask TINYINT UNSIGNED NOT NULL,
+  is_active BOOLEAN NOT NULL DEFAULT TRUE,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) CHARACTER SET utf8mb4;

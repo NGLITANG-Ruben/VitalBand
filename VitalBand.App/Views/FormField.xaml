@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VitalBand.App.Views.FormField"
+             x:Name="root">
+    <VerticalStackLayout Spacing="4">
+        <Label Text="{Binding Caption, Source={x:Reference root}}" FontSize="13"
+               FontAttributes="Bold" TextColor="{StaticResource VbInk}" />
+        <Border x:Name="Box" Style="{StaticResource FieldBorder}" HeightRequest="48">
+            <Grid ColumnDefinitions="*,Auto">
+                <Entry Text="{Binding Text, Source={x:Reference root}}"
+                       Placeholder="{Binding Placeholder, Source={x:Reference root}}"
+                       IsPassword="{Binding IsHidden, Source={x:Reference root}}"
+                       Keyboard="{Binding InputKeyboard, Source={x:Reference root}}"
+                       BackgroundColor="Transparent" TextColor="{StaticResource VbInk}"
+                       FontSize="14" VerticalOptions="Center" />
+                <Label Grid.Column="1" Text="{Binding ToggleText, Source={x:Reference root}}"
+                       IsVisible="{Binding IsPassword, Source={x:Reference root}}"
+                       TextColor="{StaticResource VbBrand}" FontSize="12" FontAttributes="Bold" VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnToggleTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+        </Border>
+        <Label Text="{Binding Error, Source={x:Reference root}}" Style="{StaticResource ErrorText}"
+               IsVisible="{Binding HasError, Source={x:Reference root}}" />
+    </VerticalStackLayout>
+</ContentView>

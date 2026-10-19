@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:VitalBand.App.ViewModels"
+             xmlns:v="clr-namespace:VitalBand.App.Views"
+             x:Class="VitalBand.App.Views.ProfilePage"
+             x:DataType="vm:ProfileViewModel"
+             BackgroundColor="{StaticResource VbBg}"
+             Shell.NavBarIsVisible="False">
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout>
+                <v:PageHeader Title="Profil" Subtitle="Votre espace personnel" />
+                <VerticalStackLayout Padding="20,4,20,24" Spacing="12">
+                    <VerticalStackLayout HorizontalOptions="Center" Spacing="6">
+                        <v:AvatarView Size="96" HorizontalOptions="Center"
+                                      Source="{Binding AvatarSource}" Initials="{Binding Initials}">
+                            <v:AvatarView.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ChangePhotoCommand}" />
+                            </v:AvatarView.GestureRecognizers>
+                        </v:AvatarView>
+                        <Label Text="Changer la photo" FontSize="13" FontAttributes="Bold" HorizontalOptions="Center"
+                               TextColor="{StaticResource VbBrand}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ChangePhotoCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Label Text="{Binding Name}" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center"
+                               TextColor="{StaticResource VbDark}" />
+                    </VerticalStackLayout>
+
+                    <Border Style="{StaticResource Card}">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GoTipsCommand}" />
+                        </Border.GestureRecognizers>
+                        <Grid ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout>
+                                <Label Text="Conseils &amp; FAQ" FontAttributes="Bold" TextColor="{StaticResource VbInk}" />
+                                <Label Text="Un conseil santé chaque jour" Style="{StaticResource MutedText}" />
+                            </VerticalStackLayout>
+                            <Label Grid.Column="1" Text="›" FontSize="24" TextColor="{StaticResource VbBrand}" VerticalOptions="Center" />
+                        </Grid>
+                    </Border>
+                    <Border Style="{StaticResource Card}">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GoThresholdsCommand}" />
+                        </Border.GestureRecognizers>
+                        <Grid ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout>
+                                <Label Text="Seuils personnalisés" FontAttributes="Bold" TextColor="{StaticResource VbInk}" />
+                                <Label Text="Valeurs limites tension et glycémie" Style="{StaticResource MutedText}" />
+                            </VerticalStackLayout>
+                            <Label Grid.Column="1" Text="›" FontSize="24" TextColor="{StaticResource VbBrand}" VerticalOptions="Center" />
+                        </Grid>
+                    </Border>
+                    <Border Style="{StaticResource Card}">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GoExportCommand}" />
+                        </Border.GestureRecognizers>
+                        <Grid ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout>
+                                <Label Text="Export PDF" FontAttributes="Bold" TextColor="{StaticResource VbInk}" />
+                                <Label Text="Synthèse à partager avec votre médecin" Style="{StaticResource MutedText}" />
+                            </VerticalStackLayout>
+                            <Label Grid.Column="1" Text="›" FontSize="24" TextColor="{StaticResource VbBrand}" VerticalOptions="Center" />
+                        </Grid>
+                    </Border>
+                    <Border Style="{StaticResource Card}">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding LogoutCommand}" />
+                        </Border.GestureRecognizers>
+                        <Label Text="Se déconnecter" FontAttributes="Bold" TextColor="{StaticResource VbDanger}" />
+                    </Border>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <v:ToastView />
+    </Grid>
+</ContentPage>

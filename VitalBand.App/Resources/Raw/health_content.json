@@ -1,0 +1,33 @@
+{
+  "tips": [
+    { "category": "Tension", "title": "Mesurez au repos", "text": "Asseyez-vous au calme pendant 5 minutes, le dos appuyé, les pieds à plat, le bras posé à hauteur du cœur. Ne parlez pas pendant la mesure." },
+    { "category": "Tension", "title": "Évitez café, tabac et effort avant la mesure", "text": "Attendez au moins 30 minutes après un café, une cigarette ou un effort physique avant de prendre votre tension." },
+    { "category": "Tension", "title": "Gardez un rythme régulier", "text": "Mesurez à heures fixes (par exemple matin et soir), toujours au même bras : les chiffres sont plus faciles à comparer." },
+    { "category": "Tension", "title": "Réduisez le sel", "text": "Un excès de sel favorise l’hypertension. Limitez les plats industriels, les cubes de bouillon et les charcuteries ; l’OMS recommande moins de 5 g de sel par jour." },
+    { "category": "Tension", "title": "Bougez chaque jour", "text": "Une activité physique régulière, comme la marche rapide, aide à garder une tension stable. Visez environ 30 minutes, la plupart des jours." },
+    { "category": "Tension", "title": "Ne modifiez jamais votre traitement seul", "text": "Si vous suivez un traitement, ne l’arrêtez pas et ne changez pas les doses sans l’accord de votre médecin, même si vos chiffres semblent bons." },
+    { "category": "Glycémie", "title": "Mesurez à jeun le matin", "text": "La glycémie « à jeun » se mesure après au moins 8 heures sans manger, avant le petit-déjeuner." },
+    { "category": "Glycémie", "title": "Lavez-vous les mains avant de piquer", "text": "Des traces de sucre sur les doigts faussent le résultat. Lavez-vous les mains à l’eau et au savon, puis séchez-les bien." },
+    { "category": "Glycémie", "title": "Variez les points de piqûre", "text": "Changez de doigt et de côté du doigt à chaque prélèvement pour limiter la douleur et les callosités." },
+    { "category": "Glycémie", "title": "Privilégiez les fibres", "text": "Légumes, légumineuses et céréales complètes ralentissent l’absorption du sucre. Limitez les boissons sucrées et les sucreries." },
+    { "category": "Glycémie", "title": "Notez le contexte", "text": "Repas, effort, stress, maladie : ajoutez un commentaire à vos mesures pour aider votre médecin à les interpréter." },
+    { "category": "Mode de vie", "title": "Dormez suffisamment", "text": "Un sommeil régulier de 7 à 9 heures pour un adulte aide à mieux contrôler la tension et la glycémie." },
+    { "category": "Mode de vie", "title": "Respirez pour apaiser le stress", "text": "Cinq minutes de respiration lente (inspirer 4 secondes, expirer 6 secondes) peuvent aider à se détendre avant une mesure." },
+    { "category": "Mode de vie", "title": "Buvez de l’eau", "text": "Hydratez-vous régulièrement dans la journée, de préférence avec de l’eau plutôt qu’avec des boissons sucrées." },
+    { "category": "Mode de vie", "title": "Limitez l’alcool, arrêtez le tabac", "text": "L’alcool en excès et le tabac fatiguent le cœur et les vaisseaux. Votre médecin peut vous aider à arrêter de fumer." },
+    { "category": "Mode de vie", "title": "Préparez votre consultation", "text": "Avant le rendez-vous, exportez votre synthèse PDF depuis le profil : votre médecin voit l’évolution de vos mesures d’un coup d’œil." },
+    { "category": "Mode de vie", "title": "Consultez en cas de doute", "text": "Des valeurs hors seuil répétées, des maux de tête persistants, des vertiges ou une soif inhabituelle méritent un avis médical." }
+  ],
+  "faq": [
+    { "question": "À quelle fréquence dois-je mesurer ma tension ou ma glycémie ?", "answer": "Suivez les consignes de votre médecin. À défaut, mesurez à heures régulières et utilisez les rappels de l’application pour ne pas oublier." },
+    { "question": "Que signifient les deux chiffres de la tension ?", "answer": "Le premier (systolique) correspond à la pression lorsque le cœur se contracte, le second (diastolique) à la pression entre deux battements. Ils s’expriment en mmHg." },
+    { "question": "Qu’est-ce qu’une glycémie à jeun ?", "answer": "C’est le taux de sucre dans le sang mesuré après au moins 8 heures sans manger. Dans l’application, indiquez le moment de la mesure (à jeun, avant ou après repas)." },
+    { "question": "Ma valeur est hors seuil, que faire ?", "answer": "Reposez-vous quelques minutes puis refaites la mesure. Si elle reste hors seuil de façon répétée ou si vous avez des symptômes inhabituels, contactez votre médecin. En cas de douleur dans la poitrine, de gêne respiratoire, de faiblesse d’un côté du corps, de difficulté à parler ou de malaise important, appelez immédiatement les urgences." },
+    { "question": "Comment fonctionnent les seuils personnalisés ?", "answer": "Chaque constante a un minimum et un maximum, réglables dans Profil > Seuils personnalisés. Les valeurs proposées par défaut sont indicatives : adaptez-les avec votre médecin. L’application signale les mesures qui en sortent." },
+    { "question": "Comment partager mes mesures avec mon médecin ?", "answer": "Dans Profil > Export PDF, choisissez la période puis générez la synthèse. Vous pouvez ensuite l’envoyer par e-mail ou par messagerie, ou l’imprimer." },
+    { "question": "Mes rappels n’arrivent pas, pourquoi ?", "answer": "Vérifiez que les notifications de VitalBand sont autorisées dans les paramètres du téléphone et que l’optimisation de la batterie ne bloque pas l’application. Ouvrez l’application de temps en temps pour qu’elle reprogramme les rappels." },
+    { "question": "Mes données sont-elles protégées ?", "answer": "Vos mesures sont liées à votre compte et protégées par votre mot de passe, stocké sous forme chiffrée. Ne partagez pas vos identifiants." },
+    { "question": "VitalBand peut-il remplacer mon médecin ?", "answer": "Non. VitalBand est un carnet de suivi : il ne pose aucun diagnostic et ne remplace pas l’avis d’un professionnel de santé." },
+    { "question": "Comment modifier ou supprimer une mesure ?", "answer": "Dans l’onglet Historique, touchez la mesure : vous pouvez changer ses valeurs, son commentaire ou la supprimer." }
+  ]
+}

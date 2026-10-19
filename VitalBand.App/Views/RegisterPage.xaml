@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:VitalBand.App.ViewModels"
+             xmlns:v="clr-namespace:VitalBand.App.Views"
+             x:Class="VitalBand.App.Views.RegisterPage"
+             x:DataType="vm:RegisterViewModel"
+             BackgroundColor="{StaticResource VbBg}"
+             Shell.NavBarIsVisible="False">
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout>
+                <v:PageHeader Title="Créez votre compte" Subtitle="Vos constantes, votre historique" />
+                <VerticalStackLayout Padding="24" Spacing="12">
+                    <v:FormField Caption="Nom" Placeholder="Quel est votre nom ?"
+                                 Text="{Binding LastName}" Error="{Binding LastNameError}" />
+                    <v:FormField Caption="Prénom" Placeholder="Quel est votre prénom ?"
+                                 Text="{Binding FirstName}" Error="{Binding FirstNameError}" />
+                    <v:FormField Caption="E-mail" Placeholder="Quelle est votre adresse e-mail ?"
+                                 Text="{Binding Email}" Error="{Binding EmailError}" InputKeyboard="Email" />
+                    <v:FormField Caption="Mot de passe" Placeholder="Entrez votre mot de passe"
+                                 Text="{Binding Password}" Error="{Binding PasswordError}" IsPassword="True" />
+                    <v:FormField Caption="Confirmer le mot de passe" Placeholder="Confirmez votre mot de passe"
+                                 Text="{Binding Confirm}" Error="{Binding ConfirmError}" IsPassword="True" />
+                    <HorizontalStackLayout Spacing="8">
+                        <CheckBox IsChecked="{Binding Accepted}" Color="{StaticResource VbBrand}" VerticalOptions="Center" />
+                        <Label Text="J’accepte les conditions d’utilisation" FontSize="13"
+                               VerticalOptions="Center" TextColor="{StaticResource VbBrand}" />
+                    </HorizontalStackLayout>
+                    <Label Text="{Binding TermsError}" Style="{StaticResource ErrorText}" IsVisible="{Binding HasTermsError}" />
+                    <Button Text="S’inscrire" Style="{StaticResource PrimaryButton}" Command="{Binding RegisterCommand}" />
+                    <ActivityIndicator IsRunning="{Binding IsBusy}" Color="{StaticResource VbBrand}" />
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="4">
+                        <Label Text="Vous avez déjà un compte ?" FontSize="13" TextColor="{StaticResource VbMuted}" />
+                        <Label Text="Se connecter" FontSize="13" FontAttributes="Bold" TextColor="{StaticResource VbBrand}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GoLoginCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <Border IsVisible="{Binding ToastVisible}" VerticalOptions="End" HorizontalOptions="Center"
+                Margin="24,0,24,40" Padding="18,12" BackgroundColor="#4A4A4A" StrokeThickness="0"
+                StrokeShape="RoundRectangle 20">
+            <Label Text="{Binding ToastMessage}" TextColor="White" FontSize="13" HorizontalTextAlignment="Center" />
+        </Border>
+    </Grid>
+</ContentPage>

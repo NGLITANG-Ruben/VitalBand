@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="VitalBand.Api/VitalBand.Api.csproj" />
+  <Project Path="VitalBand.App/VitalBand.App.csproj" />
+</Solution>

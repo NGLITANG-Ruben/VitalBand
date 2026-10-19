@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VitalBand.App.Views.WelcomePage"
+             BackgroundColor="{StaticResource VbDark}"
+             Shell.NavBarIsVisible="False">
+    <VerticalStackLayout VerticalOptions="Center" Padding="32" Spacing="16">
+        <Image Source="heart.svg" HeightRequest="140" HorizontalOptions="Center" />
+        <Label Text="Bienvenue sur VitalBand" TextColor="White" FontSize="28" FontAttributes="Bold"
+               HorizontalTextAlignment="Center" />
+        <Label Text="Suivez vos constantes et partagez-les avec votre médecin."
+               TextColor="{StaticResource VbMint}" FontSize="15" HorizontalTextAlignment="Center" />
+        <Button Text="Commencer" BackgroundColor="White" TextColor="{StaticResource VbBrand}"
+                FontAttributes="Bold" CornerRadius="12" HeightRequest="50" Margin="0,24,0,0"
+                Clicked="OnStart" />
+    </VerticalStackLayout>
+</ContentPage>

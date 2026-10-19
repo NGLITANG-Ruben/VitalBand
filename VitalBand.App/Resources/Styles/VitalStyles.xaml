@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Color x:Key="VbDark">#073F3A</Color>
+    <Color x:Key="VbBrand">#0F6B5E</Color>
+    <Color x:Key="VbMint">#CDEDE5</Color>
+    <Color x:Key="VbBg">#F7F7F7</Color>
+    <Color x:Key="VbDanger">#E5173F</Color>
+    <Color x:Key="VbInk">#1D2B28</Color>
+    <Color x:Key="VbMuted">#5C6D69</Color>
+
+    <Style x:Key="PrimaryButton" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource VbBrand}" />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="HeightRequest" Value="50" />
+    </Style>
+    <Style x:Key="DangerButton" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="White" />
+        <Setter Property="TextColor" Value="{StaticResource VbDanger}" />
+        <Setter Property="BorderColor" Value="{StaticResource VbDanger}" />
+        <Setter Property="BorderWidth" Value="1.5" />
+        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="HeightRequest" Value="50" />
+    </Style>
+    <Style x:Key="ChipButton" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="White" />
+        <Setter Property="TextColor" Value="{StaticResource VbBrand}" />
+        <Setter Property="BorderColor" Value="{StaticResource VbBrand}" />
+        <Setter Property="BorderWidth" Value="1.5" />
+        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="HeightRequest" Value="40" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Padding" Value="16,0" />
+    </Style>
+    <Style x:Key="FieldBorder" TargetType="Border">
+        <Setter Property="Stroke" Value="{StaticResource VbBrand}" />
+        <Setter Property="StrokeThickness" Value="1.5" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 10" />
+        <Setter Property="BackgroundColor" Value="White" />
+        <Setter Property="Padding" Value="12,0" />
+    </Style>
+    <Style x:Key="Card" TargetType="Border">
+        <Setter Property="Stroke" Value="#E3E8E6" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 16" />
+        <Setter Property="BackgroundColor" Value="White" />
+        <Setter Property="Padding" Value="16,12" />
+        <Setter Property="Shadow">
+            <Setter.Value>
+                <Shadow Brush="#000000" Opacity="0.07" Radius="10" Offset="0,3" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ErrorText" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource VbDanger}" />
+        <Setter Property="FontSize" Value="11" />
+    </Style>
+    <Style x:Key="MutedText" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource VbMuted}" />
+        <Setter Property="FontSize" Value="12" />
+    </Style>
+</ResourceDictionary>

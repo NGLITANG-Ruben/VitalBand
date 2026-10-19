@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:VitalBand.App.ViewModels"
+             xmlns:v="clr-namespace:VitalBand.App.Views"
+             x:Class="VitalBand.App.Views.ReminderEntryPage"
+             x:DataType="vm:ReminderEntryViewModel"
+             BackgroundColor="{StaticResource VbBg}"
+             Shell.NavBarIsVisible="False">
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout>
+                <v:PageHeader Title="{Binding Title}" Subtitle="Choisissez l’heure et les jours" ActionText="Annuler" ActionCommand="{Binding CancelCommand}" />
+                <VerticalStackLayout Padding="24,8,24,32" Spacing="14">
+                    <HorizontalStackLayout Spacing="8">
+                        <Button Text="Tension" Style="{StaticResource ChipButton}" Command="{Binding SelectBpCommand}">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding IsBp}" Value="True">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource VbBrand}" />
+                                    <Setter Property="TextColor" Value="White" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+                        <Button Text="Glycémie" Style="{StaticResource ChipButton}" Command="{Binding SelectGlycemiaCommand}">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding IsGlycemia}" Value="True">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource VbBrand}" />
+                                    <Setter Property="TextColor" Value="White" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+                    </HorizontalStackLayout>
+
+                    <v:FormField Caption="Heure (HH:MM)" Placeholder="Ex. 08:00" Text="{Binding TimeText}" Error="{Binding TimeError}" />
+
+                    <Label Text="Jours" FontSize="13" FontAttributes="Bold" TextColor="{StaticResource VbInk}" />
+                    <HorizontalStackLayout Spacing="6" BindableLayout.ItemsSource="{Binding Days}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="vm:DayChip">
+                                <Button Text="{Binding Label}" Clicked="OnDayClicked" WidthRequest="42" HeightRequest="42"
+                                        CornerRadius="21" Padding="0" FontSize="13" BackgroundColor="White"
+                                        TextColor="{StaticResource VbBrand}" BorderColor="{StaticResource VbBrand}" BorderWidth="1.5">
+                                    <Button.Triggers>
+                                        <DataTrigger TargetType="Button" Binding="{Binding IsOn}" Value="True">
+                                            <Setter Property="BackgroundColor" Value="{StaticResource VbBrand}" />
+                                            <Setter Property="TextColor" Value="White" />
+                                        </DataTrigger>
+                                    </Button.Triggers>
+                                </Button>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </HorizontalStackLayout>
+                    <Label Text="{Binding DaysError}" Style="{StaticResource ErrorText}" IsVisible="{Binding HasDaysError}" />
+
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="Rappel actif" VerticalOptions="Center" TextColor="{StaticResource VbInk}" />
+                        <Switch Grid.Column="1" IsToggled="{Binding IsActive}" OnColor="{StaticResource VbBrand}" />
+                    </Grid>
+
+                    <Button Text="Enregistrer" Style="{StaticResource PrimaryButton}" Command="{Binding SaveCommand}" Margin="0,8,0,0" />
+                    <ActivityIndicator IsRunning="{Binding IsBusy}" Color="{StaticResource VbBrand}" />
+                    <Button Text="Supprimer ce rappel" Style="{StaticResource DangerButton}"
+                            Command="{Binding DeleteCommand}" IsVisible="{Binding IsEditing}" />
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <v:ToastView />
+    </Grid>
+</ContentPage>

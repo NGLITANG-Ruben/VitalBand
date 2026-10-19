@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:VitalBand.App.ViewModels"
+             xmlns:m="clr-namespace:VitalBand.App.Models"
+             xmlns:v="clr-namespace:VitalBand.App.Views"
+             x:Class="VitalBand.App.Views.TipsPage"
+             x:DataType="vm:TipsViewModel"
+             BackgroundColor="{StaticResource VbBg}"
+             Shell.NavBarIsVisible="False">
+    <ScrollView>
+        <VerticalStackLayout>
+            <v:PageHeader Title="Conseils &amp; FAQ" Subtitle="Votre santé au quotidien"
+                          ActionText="Retour" ActionCommand="{Binding BackCommand}" />
+            <VerticalStackLayout Padding="20,8,20,32" Spacing="12">
+                <Border Style="{StaticResource Card}" BackgroundColor="{StaticResource VbMint}">
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="CONSEIL DU JOUR" FontSize="11" FontAttributes="Bold" TextColor="{StaticResource VbBrand}" />
+                        <Label Text="{Binding DailyTitle}" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource VbDark}" />
+                        <Label Text="{Binding DailyText}" FontSize="14" TextColor="{StaticResource VbInk}" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Label Text="Conseils" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource VbDark}" Margin="0,8,0,0" />
+                <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                    <HorizontalStackLayout Spacing="8">
+                        <Button Text="Tous" Style="{StaticResource ChipButton}" Command="{Binding SetFilterCommand}" CommandParameter="ALL">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding Filter}" Value="ALL">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource VbBrand}" />
+                                    <Setter Property="TextColor" Value="White" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+                        <Button Text="Tension" Style="{StaticResource ChipButton}" Command="{Binding SetFilterCommand}" CommandParameter="Tension">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding Filter}" Value="Tension">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource VbBrand}" />
+                                    <Setter Property="TextColor" Value="White" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+                        <Button Text="Glycémie" Style="{StaticResource ChipButton}" Command="{Binding SetFilterCommand}" CommandParameter="Glycémie">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding Filter}" Value="Glycémie">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource VbBrand}" />
+                                    <Setter Property="TextColor" Value="White" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+                        <Button Text="Mode de vie" Style="{StaticResource ChipButton}" Command="{Binding SetFilterCommand}" CommandParameter="Mode de vie">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding Filter}" Value="Mode de vie">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource VbBrand}" />
+                                    <Setter Property="TextColor" Value="White" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+                    </HorizontalStackLayout>
+                </ScrollView>
+                <VerticalStackLayout Spacing="10" BindableLayout.ItemsSource="{Binding Tips}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="m:HealthTip">
+                            <Border Style="{StaticResource Card}">
+                                <VerticalStackLayout Spacing="3">
+                                    <Label Text="{Binding Category}" FontSize="11" FontAttributes="Bold" TextColor="{StaticResource VbBrand}" />
+                                    <Label Text="{Binding Title}" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource VbInk}" />
+                                    <Label Text="{Binding Text}" FontSize="14" TextColor="{StaticResource VbMuted}" />
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+
+                <Label Text="Questions fréquentes" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource VbDark}" Margin="0,12,0,0" />
+                <VerticalStackLayout Spacing="10" BindableLayout.ItemsSource="{Binding Faq}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="m:FaqItem">
+                            <Border Style="{StaticResource Card}">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnFaqTapped" />
+                                </Border.GestureRecognizers>
+                                <VerticalStackLayout Spacing="8">
+                                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                                        <Label Text="{Binding Question}" FontSize="15" FontAttributes="Bold" TextColor="{StaticResource VbInk}" />
+                                        <Label Grid.Column="1" Text="+" FontSize="22" TextColor="{StaticResource VbBrand}" VerticalOptions="Start">
+                                            <Label.Triggers>
+                                                <DataTrigger TargetType="Label" Binding="{Binding IsOpen}" Value="True">
+                                                    <Setter Property="Text" Value="−" />
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+                                    </Grid>
+                                    <Label Text="{Binding Answer}" FontSize="14" TextColor="{StaticResource VbMuted}"
+                                           IsVisible="{Binding IsOpen}" />
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+
+                <Label Text="Ces informations sont générales et ne remplacent pas l’avis d’un professionnel de santé."
+                       Style="{StaticResource MutedText}" HorizontalTextAlignment="Center" Margin="0,16,0,0" />
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

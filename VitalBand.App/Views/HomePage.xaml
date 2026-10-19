@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:VitalBand.App.ViewModels"
+             xmlns:v="clr-namespace:VitalBand.App.Views"
+             x:Class="VitalBand.App.Views.HomePage"
+             x:DataType="vm:HomeViewModel"
+             BackgroundColor="{StaticResource VbBg}"
+             Shell.NavBarIsVisible="False">
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout>
+                <v:PageHeader Title="{Binding Greeting}" Subtitle="Vos constantes, votre historique"
+                              ShowAvatar="True" AvatarSource="{Binding AvatarSource}" Initials="{Binding Initials}" />
+                <VerticalStackLayout Padding="20,12" Spacing="12">
+                    <Border Style="{StaticResource Card}">
+                        <VerticalStackLayout Spacing="2">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Text="Tension" FontAttributes="Bold" TextColor="{StaticResource VbInk}" />
+                                <Border Grid.Column="1" BackgroundColor="{Binding LastBp.StatusBg}" StrokeThickness="0"
+                                        StrokeShape="RoundRectangle 12" Padding="10,3" IsVisible="{Binding LastBp.HasStatus}">
+                                    <Label Text="{Binding LastBp.StatusText}" TextColor="{Binding LastBp.StatusFg}"
+                                           FontSize="12" FontAttributes="Bold" />
+                                </Border>
+                            </Grid>
+                            <Label Text="{Binding LastBp.Title}" FontSize="32" FontAttributes="Bold" TextColor="{StaticResource VbInk}" />
+                            <Label Text="{Binding LastBp.Subtitle}" Style="{StaticResource MutedText}" />
+                        </VerticalStackLayout>
+                    </Border>
+                    <Border Style="{StaticResource Card}">
+                        <VerticalStackLayout Spacing="2">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Text="Glycémie" FontAttributes="Bold" TextColor="{StaticResource VbInk}" />
+                                <Border Grid.Column="1" BackgroundColor="{Binding LastGlycemia.StatusBg}" StrokeThickness="0"
+                                        StrokeShape="RoundRectangle 12" Padding="10,3" IsVisible="{Binding LastGlycemia.HasStatus}">
+                                    <Label Text="{Binding LastGlycemia.StatusText}" TextColor="{Binding LastGlycemia.StatusFg}"
+                                           FontSize="12" FontAttributes="Bold" />
+                                </Border>
+                            </Grid>
+                            <Label Text="{Binding LastGlycemia.Title}" FontSize="32" FontAttributes="Bold" TextColor="{StaticResource VbInk}" />
+                            <Label Text="{Binding LastGlycemia.Subtitle}" Style="{StaticResource MutedText}" />
+                        </VerticalStackLayout>
+                    </Border>
+                    <Border Style="{StaticResource Card}">
+                        <VerticalStackLayout Spacing="2">
+                            <Label Text="Prochain rappel" FontAttributes="Bold" TextColor="{StaticResource VbInk}" />
+                            <Label Text="{Binding NextReminder}" Style="{StaticResource MutedText}" />
+                        </VerticalStackLayout>
+                    </Border>
+                    <Border Style="{StaticResource Card}" BackgroundColor="{StaticResource VbMint}">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenTipsCommand}" />
+                        </Border.GestureRecognizers>
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="CONSEIL DU JOUR" FontSize="11" FontAttributes="Bold" TextColor="{StaticResource VbBrand}" />
+                            <Label Text="{Binding TipTitle}" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource VbDark}" />
+                            <Label Text="{Binding TipText}" FontSize="13" TextColor="{StaticResource VbInk}"
+                                   MaxLines="3" LineBreakMode="TailTruncation" />
+                            <Label Text="Conseils et FAQ ›" FontSize="13" FontAttributes="Bold" TextColor="{StaticResource VbBrand}" />
+                        </VerticalStackLayout>
+                    </Border>
+                    <Button Text="+ Nouvelle mesure" Style="{StaticResource PrimaryButton}" Command="{Binding NewMeasurementCommand}" />
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <v:ToastView />
+    </Grid>
+</ContentPage>

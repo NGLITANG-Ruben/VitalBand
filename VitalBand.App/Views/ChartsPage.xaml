@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:VitalBand.App.ViewModels"
+             xmlns:v="clr-namespace:VitalBand.App.Views"
+             x:Class="VitalBand.App.Views.ChartsPage"
+             x:DataType="vm:ChartsViewModel"
+             BackgroundColor="{StaticResource VbBg}"
+             Shell.NavBarIsVisible="False">
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout>
+                <v:PageHeader Title="Courbes" Subtitle="Évolution sur la période" />
+                <VerticalStackLayout Padding="24,8,24,24" Spacing="12">
+                    <HorizontalStackLayout Spacing="8">
+                        <Button Text="Tension" Style="{StaticResource ChipButton}" Command="{Binding SetTabCommand}" CommandParameter="BP">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding Tab}" Value="BP">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource VbBrand}" />
+                                    <Setter Property="TextColor" Value="White" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+                        <Button Text="Glycémie" Style="{StaticResource ChipButton}" Command="{Binding SetTabCommand}" CommandParameter="GLYCEMIA">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding Tab}" Value="GLYCEMIA">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource VbBrand}" />
+                                    <Setter Property="TextColor" Value="White" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="8">
+                        <Button Text="7 j" Style="{StaticResource ChipButton}" Command="{Binding SetPeriodCommand}" CommandParameter="7">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding Period}" Value="7">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource VbBrand}" />
+                                    <Setter Property="TextColor" Value="White" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+                        <Button Text="30 j" Style="{StaticResource ChipButton}" Command="{Binding SetPeriodCommand}" CommandParameter="30">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding Period}" Value="30">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource VbBrand}" />
+                                    <Setter Property="TextColor" Value="White" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+                        <Button Text="90 j" Style="{StaticResource ChipButton}" Command="{Binding SetPeriodCommand}" CommandParameter="90">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding Period}" Value="90">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource VbBrand}" />
+                                    <Setter Property="TextColor" Value="White" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+                    </HorizontalStackLayout>
+
+                    <Border Style="{StaticResource Card}" Padding="8">
+                        <VerticalStackLayout Spacing="8">
+                            <GraphicsView x:Name="ChartView" HeightRequest="240" IsVisible="{Binding HasData}" />
+                            <Label Text="Pas assez de données : ajoutez au moins deux mesures sur cette période."
+                                   IsVisible="{Binding NoData}" Style="{StaticResource MutedText}"
+                                   HorizontalTextAlignment="Center" Margin="12,40" />
+                            <HorizontalStackLayout IsVisible="{Binding IsBp}" Spacing="12" Margin="8,0">
+                                <Label Text="● Systolique" TextColor="#0F6B5E" FontSize="12" />
+                                <Label Text="● Diastolique" TextColor="#3A7CA5" FontSize="12" />
+                                <Label Text="● Hors seuil" TextColor="#D9822B" FontSize="12" />
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout IsVisible="{Binding IsGlycemia}" Spacing="12" Margin="8,0">
+                                <Label Text="● Glycémie" TextColor="#0F6B5E" FontSize="12" />
+                                <Label Text="● Hors seuil" TextColor="#D9822B" FontSize="12" />
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+                        <Border Style="{StaticResource Card}" Padding="12">
+                            <VerticalStackLayout>
+                                <Label Text="Moyenne" Style="{StaticResource MutedText}" />
+                                <Label Text="{Binding AvgText}" FontAttributes="Bold" FontSize="15" TextColor="{StaticResource VbInk}" />
+                            </VerticalStackLayout>
+                        </Border>
+                        <Border Grid.Column="1" Style="{StaticResource Card}" Padding="12">
+                            <VerticalStackLayout>
+                                <Label Text="Min" Style="{StaticResource MutedText}" />
+                                <Label Text="{Binding MinText}" FontAttributes="Bold" FontSize="15" TextColor="{StaticResource VbInk}" />
+                            </VerticalStackLayout>
+                        </Border>
+                        <Border Grid.Column="2" Style="{StaticResource Card}" Padding="12">
+                            <VerticalStackLayout>
+                                <Label Text="Max" Style="{StaticResource MutedText}" />
+                                <Label Text="{Binding MaxText}" FontAttributes="Bold" FontSize="15" TextColor="{StaticResource VbInk}" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <v:ToastView />
+    </Grid>
+</ContentPage>

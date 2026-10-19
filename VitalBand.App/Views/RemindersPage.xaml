@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:VitalBand.App.ViewModels"
+             xmlns:m="clr-namespace:VitalBand.App.Models"
+             xmlns:v="clr-namespace:VitalBand.App.Views"
+             x:Class="VitalBand.App.Views.RemindersPage"
+             x:DataType="vm:RemindersViewModel"
+             BackgroundColor="{StaticResource VbBg}"
+             Shell.NavBarIsVisible="False">
+    <Grid RowDefinitions="Auto,*,Auto">
+        <v:PageHeader Title="Rappels" Subtitle="Ne manquez plus une mesure" />
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Items}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="m:ReminderItem">
+                    <Border Style="{StaticResource Card}" Margin="20,8,20,2">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenCommand, Source={RelativeSource AncestorType={x:Type vm:RemindersViewModel}}}"
+                                                  CommandParameter="{Binding .}" />
+                        </Border.GestureRecognizers>
+                        <Grid ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="{Binding Title}" FontSize="17" FontAttributes="Bold" TextColor="{StaticResource VbInk}" />
+                                <Label Text="{Binding DaysText}" Style="{StaticResource MutedText}" />
+                            </VerticalStackLayout>
+                            <Switch Grid.Column="1" IsToggled="{Binding IsActive, Mode=OneTime}" Toggled="OnToggled"
+                                    OnColor="{StaticResource VbBrand}" VerticalOptions="Center" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Label Grid.Row="1" Text="Aucun rappel pour le moment." IsVisible="{Binding IsEmpty}"
+               HorizontalOptions="Center" Margin="0,40,0,0" TextColor="{StaticResource VbMuted}" />
+        <VerticalStackLayout Grid.Row="2" Padding="24,8,24,12" Spacing="8">
+            <Button Text="+ Ajouter un rappel" Style="{StaticResource PrimaryButton}" Command="{Binding NewCommand}" />
+            <Button Text="Tester la notification" BackgroundColor="Transparent" TextColor="{StaticResource VbBrand}"
+                    Command="{Binding TestNotificationCommand}" />
+        </VerticalStackLayout>
+        <v:ToastView Grid.Row="1" Grid.RowSpan="2" />
+    </Grid>
+</ContentPage>

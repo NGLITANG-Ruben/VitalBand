@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VitalBand.App.Views.ToastView"
+             InputTransparent="True">
+    <Border IsVisible="{Binding ToastVisible}" VerticalOptions="End" HorizontalOptions="Center"
+            Margin="24,0,24,40" Padding="18,12" BackgroundColor="#4A4A4A" StrokeThickness="0"
+            StrokeShape="RoundRectangle 20">
+        <Label Text="{Binding ToastMessage}" TextColor="White" FontSize="13" HorizontalTextAlignment="Center" />
+    </Border>
+</ContentView>

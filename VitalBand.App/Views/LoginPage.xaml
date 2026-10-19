@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:VitalBand.App.ViewModels"
+             xmlns:v="clr-namespace:VitalBand.App.Views"
+             x:Class="VitalBand.App.Views.LoginPage"
+             x:DataType="vm:LoginViewModel"
+             BackgroundColor="{StaticResource VbBg}"
+             Shell.NavBarIsVisible="False">
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout>
+                <v:PageHeader Title="Accédez à votre espace !" Subtitle="Vos constantes, votre historique" />
+                <VerticalStackLayout Padding="24" Spacing="14">
+                    <v:FormField Caption="E-mail" Placeholder="Quelle est votre adresse e-mail ?"
+                                 Text="{Binding Email}" Error="{Binding EmailError}" InputKeyboard="Email" />
+                    <v:FormField Caption="Mot de passe" Placeholder="Entrez votre mot de passe"
+                                 Text="{Binding Password}" Error="{Binding PasswordError}" IsPassword="True" />
+                    <Button Text="Se connecter" Style="{StaticResource PrimaryButton}" Command="{Binding LoginCommand}" />
+                    <ActivityIndicator IsRunning="{Binding IsBusy}" Color="{StaticResource VbBrand}" />
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="4">
+                        <Label Text="Vous n’avez pas de compte ?" FontSize="13" TextColor="{StaticResource VbMuted}" />
+                        <Label Text="Créer un compte" FontSize="13" FontAttributes="Bold" TextColor="{StaticResource VbBrand}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GoRegisterCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <Border IsVisible="{Binding ToastVisible}" VerticalOptions="End" HorizontalOptions="Center"
+                Margin="24,0,24,40" Padding="18,12" BackgroundColor="#4A4A4A" StrokeThickness="0"
+                StrokeShape="RoundRectangle 20">
+            <Label Text="{Binding ToastMessage}" TextColor="White" FontSize="13" HorizontalTextAlignment="Center" />
+        </Border>
+    </Grid>
+</ContentPage>

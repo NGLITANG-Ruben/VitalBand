@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:VitalBand.App.ViewModels"
+             xmlns:v="clr-namespace:VitalBand.App.Views"
+             x:Class="VitalBand.App.Views.EntryPage"
+             x:DataType="vm:EntryViewModel"
+             BackgroundColor="{StaticResource VbBg}"
+             Shell.NavBarIsVisible="False">
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout>
+                <v:PageHeader Title="{Binding Title}" Subtitle="Renseignez votre relevé" ActionText="Annuler" ActionCommand="{Binding CancelCommand}" />
+                <VerticalStackLayout Padding="24,8,24,32" Spacing="12">
+                    <HorizontalStackLayout Spacing="8">
+                        <Button Text="Tension" Style="{StaticResource ChipButton}" Command="{Binding SelectBpCommand}">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding IsBp}" Value="True">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource VbBrand}" />
+                                    <Setter Property="TextColor" Value="White" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+                        <Button Text="Glycémie" Style="{StaticResource ChipButton}" Command="{Binding SelectGlycemiaCommand}">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding IsGlycemia}" Value="True">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource VbBrand}" />
+                                    <Setter Property="TextColor" Value="White" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+                    </HorizontalStackLayout>
+
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="12" IsVisible="{Binding IsBp}">
+                        <v:FormField Caption="Systolique (mmHg)" Placeholder="Ex. 120" InputKeyboard="Numeric"
+                                     Text="{Binding Systolic}" Error="{Binding SystolicError}" />
+                        <v:FormField Grid.Column="1" Caption="Diastolique (mmHg)" Placeholder="Ex. 80" InputKeyboard="Numeric"
+                                     Text="{Binding Diastolic}" Error="{Binding DiastolicError}" />
+                    </Grid>
+                    <v:FormField IsVisible="{Binding IsBp}" Caption="Pouls (facultatif)" Placeholder="Ex. 72" InputKeyboard="Numeric"
+                                 Text="{Binding Pulse}" Error="{Binding PulseError}" />
+
+                    <VerticalStackLayout IsVisible="{Binding IsGlycemia}" Spacing="12">
+                        <v:FormField Caption="Glycémie (g/L)" Placeholder="Ex. 1.05" InputKeyboard="Numeric"
+                                     Text="{Binding Glucose}" Error="{Binding GlucoseError}" />
+                        <Label Text="Moment de la mesure" FontSize="13" FontAttributes="Bold" TextColor="{StaticResource VbInk}" />
+                        <HorizontalStackLayout Spacing="8">
+                            <Button Text="À jeun" Style="{StaticResource ChipButton}" Command="{Binding SetContextCommand}" CommandParameter="FASTING">
+                                <Button.Triggers>
+                                    <DataTrigger TargetType="Button" Binding="{Binding Context}" Value="FASTING">
+                                        <Setter Property="BackgroundColor" Value="{StaticResource VbBrand}" />
+                                        <Setter Property="TextColor" Value="White" />
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+                            <Button Text="Avant repas" Style="{StaticResource ChipButton}" Command="{Binding SetContextCommand}" CommandParameter="BEFORE_MEAL">
+                                <Button.Triggers>
+                                    <DataTrigger TargetType="Button" Binding="{Binding Context}" Value="BEFORE_MEAL">
+                                        <Setter Property="BackgroundColor" Value="{StaticResource VbBrand}" />
+                                        <Setter Property="TextColor" Value="White" />
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+                            <Button Text="Après repas" Style="{StaticResource ChipButton}" Command="{Binding SetContextCommand}" CommandParameter="AFTER_MEAL">
+                                <Button.Triggers>
+                                    <DataTrigger TargetType="Button" Binding="{Binding Context}" Value="AFTER_MEAL">
+                                        <Setter Property="BackgroundColor" Value="{StaticResource VbBrand}" />
+                                        <Setter Property="TextColor" Value="White" />
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                        <v:FormField Caption="Date (JJ/MM/AAAA)" Text="{Binding DateText}" Error="{Binding DateError}" />
+                        <v:FormField Grid.Column="1" Caption="Heure (HH:MM)" Text="{Binding TimeText}" Error="{Binding TimeError}" />
+                    </Grid>
+
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="Commentaire (facultatif)" FontSize="13" FontAttributes="Bold" TextColor="{StaticResource VbInk}" />
+                        <Border Style="{StaticResource FieldBorder}" HeightRequest="96" Padding="12,4">
+                            <Editor Text="{Binding Comment}" Placeholder="Ex. après une marche, stress..." MaxLength="500"
+                                    BackgroundColor="Transparent" TextColor="{StaticResource VbInk}" FontSize="14" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <Button Text="Enregistrer" Style="{StaticResource PrimaryButton}" Command="{Binding SaveCommand}" Margin="0,8,0,0" />
+                    <ActivityIndicator IsRunning="{Binding IsBusy}" Color="{StaticResource VbBrand}" />
+                    <Button Text="Supprimer cette mesure" Style="{StaticResource DangerButton}"
+                            Command="{Binding DeleteCommand}" IsVisible="{Binding IsEditing}" />
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <v:ToastView />
+    </Grid>
+</ContentPage>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell x:Class="VitalBand.App.AppShell"
+       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:VitalBand.App.Views"
+       Shell.FlyoutBehavior="Disabled"
+       Shell.NavBarIsVisible="False"
+       Shell.TabBarBackgroundColor="White"
+       Shell.TabBarForegroundColor="{StaticResource VbBrand}"
+       Shell.TabBarTitleColor="{StaticResource VbBrand}"
+       Shell.TabBarUnselectedColor="{StaticResource VbMuted}">
+    <ShellContent Route="welcome" ContentTemplate="{DataTemplate views:WelcomePage}" />
+    <TabBar Route="home">
+        <ShellContent Title="Accueil" Icon="tab_home.svg" ContentTemplate="{DataTemplate views:HomePage}" />
+        <ShellContent Title="Courbes" Icon="tab_chart.svg" ContentTemplate="{DataTemplate views:ChartsPage}" />
+        <ShellContent Title="Historique" Icon="tab_history.svg" ContentTemplate="{DataTemplate views:HistoryPage}" />
+        <ShellContent Title="Rappels" Icon="tab_bell.svg" ContentTemplate="{DataTemplate views:RemindersPage}" />
+        <ShellContent Title="Profil" Icon="tab_user.svg" ContentTemplate="{DataTemplate views:ProfilePage}" />
+    </TabBar>
+</Shell>

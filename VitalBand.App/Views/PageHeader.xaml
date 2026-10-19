@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:v="clr-namespace:VitalBand.App.Views"
+             x:Class="VitalBand.App.Views.PageHeader"
+             x:Name="root">
+    <Border BackgroundColor="{StaticResource VbDark}" StrokeThickness="0"
+            StrokeShape="RoundRectangle 0,0,0,70" Padding="20,56,16,44">
+        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+            <Image Source="heart.svg" WidthRequest="40" HeightRequest="40" VerticalOptions="Start" />
+            <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center">
+                <Label Text="{Binding Title, Source={x:Reference root}}" TextColor="White" FontSize="24" FontAttributes="Bold" />
+                <Label Text="{Binding Subtitle, Source={x:Reference root}}" TextColor="{StaticResource VbMint}" FontSize="13" />
+            </VerticalStackLayout>
+            <Button Grid.Column="2" Text="{Binding ActionText, Source={x:Reference root}}"
+                    Command="{Binding ActionCommand, Source={x:Reference root}}"
+                    IsVisible="{Binding HasAction, Source={x:Reference root}}"
+                    BackgroundColor="Transparent" TextColor="{StaticResource VbMint}" FontSize="14"
+                    Padding="12,0" HeightRequest="40" VerticalOptions="Start">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding ActionFilled, Source={x:Reference root}}" Value="True">
+                        <Setter Property="BackgroundColor" Value="White" />
+                        <Setter Property="TextColor" Value="{StaticResource VbBrand}" />
+                        <Setter Property="FontAttributes" Value="Bold" />
+                        <Setter Property="CornerRadius" Value="20" />
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+            <v:AvatarView Grid.Column="2" Size="46" VerticalOptions="Start"
+                          Source="{Binding AvatarSource, Source={x:Reference root}}"
+                          Initials="{Binding Initials, Source={x:Reference root}}"
+                          IsVisible="{Binding ShowAvatar, Source={x:Reference root}}" />
+        </Grid>
+    </Border>
+</ContentView>

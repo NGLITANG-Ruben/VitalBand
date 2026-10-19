@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:VitalBand.App.ViewModels"
+             xmlns:v="clr-namespace:VitalBand.App.Views"
+             x:Class="VitalBand.App.Views.ThresholdsPage"
+             x:DataType="vm:ThresholdsViewModel"
+             BackgroundColor="{StaticResource VbBg}"
+             Shell.NavBarIsVisible="False">
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout>
+                <v:PageHeader Title="Seuils personnalisés" Subtitle="Adaptés à votre suivi médical" ActionText="Retour" ActionCommand="{Binding BackCommand}" />
+                <VerticalStackLayout Padding="24,8,24,32" Spacing="14">
+                    <Label Text="Systolique (mmHg)" FontAttributes="Bold" TextColor="{StaticResource VbInk}" />
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                        <v:FormField Caption="Min" InputKeyboard="Numeric" Text="{Binding SysMin}" />
+                        <v:FormField Grid.Column="1" Caption="Max" InputKeyboard="Numeric" Text="{Binding SysMax}" Error="{Binding SysError}" />
+                    </Grid>
+                    <Label Text="Diastolique (mmHg)" FontAttributes="Bold" TextColor="{StaticResource VbInk}" />
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                        <v:FormField Caption="Min" InputKeyboard="Numeric" Text="{Binding DiaMin}" />
+                        <v:FormField Grid.Column="1" Caption="Max" InputKeyboard="Numeric" Text="{Binding DiaMax}" Error="{Binding DiaError}" />
+                    </Grid>
+                    <Label Text="Glycémie à jeun (g/L)" FontAttributes="Bold" TextColor="{StaticResource VbInk}" />
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                        <v:FormField Caption="Min" InputKeyboard="Numeric" Text="{Binding GluMin}" />
+                        <v:FormField Grid.Column="1" Caption="Max" InputKeyboard="Numeric" Text="{Binding GluMax}" Error="{Binding GluError}" />
+                    </Grid>
+                    <Label Text="Valeurs indicatives, à ajuster avec votre médecin. VitalBand ne pose pas de diagnostic."
+                           Style="{StaticResource MutedText}" />
+                    <Button Text="Enregistrer" Style="{StaticResource PrimaryButton}" Command="{Binding SaveCommand}" />
+                    <ActivityIndicator IsRunning="{Binding IsBusy}" Color="{StaticResource VbBrand}" />
+                    <Button Text="Valeurs par défaut" BackgroundColor="White" TextColor="{StaticResource VbBrand}"
+                            BorderColor="{StaticResource VbBrand}" BorderWidth="1.5" CornerRadius="12" HeightRequest="50"
+                            Command="{Binding ResetDefaultsCommand}" />
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <v:ToastView />
+    </Grid>
+</ContentPage>

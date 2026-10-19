@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:VitalBand.App.ViewModels"
+             xmlns:m="clr-namespace:VitalBand.App.Models"
+             xmlns:v="clr-namespace:VitalBand.App.Views"
+             x:Class="VitalBand.App.Views.HistoryPage"
+             x:DataType="vm:HistoryViewModel"
+             BackgroundColor="{StaticResource VbBg}"
+             Shell.NavBarIsVisible="False">
+    <Grid RowDefinitions="Auto,Auto,*">
+        <v:PageHeader Title="Historique" Subtitle="Toutes vos mesures" ActionText="+ Ajouter" ActionCommand="{Binding NewCommand}" ActionFilled="True" />
+        <HorizontalStackLayout Grid.Row="1" Padding="24,8,24,12" Spacing="8">
+            <Button Text="Tout" Style="{StaticResource ChipButton}" Command="{Binding SetFilterCommand}" CommandParameter="ALL">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding Filter}" Value="ALL">
+                        <Setter Property="BackgroundColor" Value="{StaticResource VbBrand}" />
+                        <Setter Property="TextColor" Value="White" />
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+            <Button Text="Tension" Style="{StaticResource ChipButton}" Command="{Binding SetFilterCommand}" CommandParameter="BP">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding Filter}" Value="BP">
+                        <Setter Property="BackgroundColor" Value="{StaticResource VbBrand}" />
+                        <Setter Property="TextColor" Value="White" />
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+            <Button Text="Glycémie" Style="{StaticResource ChipButton}" Command="{Binding SetFilterCommand}" CommandParameter="GLYCEMIA">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding Filter}" Value="GLYCEMIA">
+                        <Setter Property="BackgroundColor" Value="{StaticResource VbBrand}" />
+                        <Setter Property="TextColor" Value="White" />
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+        </HorizontalStackLayout>
+        <CollectionView Grid.Row="2" ItemsSource="{Binding Items}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="m:MeasurementItem">
+                    <Border Style="{StaticResource Card}" Margin="20,0,20,10">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenCommand, Source={RelativeSource AncestorType={x:Type vm:HistoryViewModel}}}"
+                                                  CommandParameter="{Binding .}" />
+                        </Border.GestureRecognizers>
+                        <Grid ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="{Binding Title}" FontSize="17" FontAttributes="Bold" TextColor="{StaticResource VbInk}" />
+                                <Label Text="{Binding Subtitle}" Style="{StaticResource MutedText}" />
+                            </VerticalStackLayout>
+                            <Border Grid.Column="1" BackgroundColor="{Binding StatusBg}" StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 12" Padding="10,3" VerticalOptions="Center"
+                                    IsVisible="{Binding HasStatus}">
+                                <Label Text="{Binding StatusText}" TextColor="{Binding StatusFg}" FontSize="12" FontAttributes="Bold" />
+                            </Border>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Label Grid.Row="2" Text="Aucune mesure pour le moment." IsVisible="{Binding IsEmpty}"
+               HorizontalOptions="Center" Margin="0,40,0,0" TextColor="{StaticResource VbMuted}" />
+        <v:ToastView Grid.Row="2" />
+    </Grid>
+</ContentPage>
