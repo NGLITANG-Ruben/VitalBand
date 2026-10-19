@@ -7,5 +7,6 @@
     <!-- APK installable directement (et non un .aab) ; pas de réduction de code (évite les problèmes de JSON) -->
     <AndroidPackageFormat>apk</AndroidPackageFormat>
     <PublishTrimmed>false</PublishTrimmed>
+    <RunAOTCompilation>false</RunAOTCompilation>
   </PropertyGroup>
 </Project>
